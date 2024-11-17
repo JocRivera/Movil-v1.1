@@ -2,11 +2,13 @@ import 'package:bookedge/widget/utilities/card_component.dart';
 import 'package:flutter/material.dart';
 
 class Grid extends StatelessWidget {
-  final List items;
+  final List<Map<String, dynamic>> items;
+  final String Function(Map<String, dynamic>) tittle;
 
   const Grid({
     super.key,
     required this.items,
+    required this.tittle,
   });
 
   @override
@@ -21,7 +23,7 @@ class Grid extends StatelessWidget {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return CardComponent(data: items[index]);
+        return CardComponent(data: items[index], tittle: tittle(items[index]));
       },
     );
   }

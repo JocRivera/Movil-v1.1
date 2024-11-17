@@ -30,15 +30,20 @@ class Content extends StatelessWidget {
                   icon: Icons.hotel,
                   label: 'Alojamientos',
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(AlojamientosScreen.routeName);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AlojamientosScreen()));
                   },
                 ),
                 BuildCard(
                   icon: Icons.book,
                   label: 'Reservas',
                   onTap: () {
-                    Navigator.of(context).pushNamed(ReservasScreen.routeName);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReservasScreen()));
                   },
                 ),
               ],

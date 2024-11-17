@@ -13,12 +13,6 @@ class _NavbarState extends State<Navbar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Bookedge'),
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
-      ),
       actions: [
         PopupMenuButton(
           icon: const CircleAvatar(
