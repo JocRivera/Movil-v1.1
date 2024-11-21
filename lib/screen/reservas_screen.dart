@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bookedge/widget/utilities/search_filtered_bar.dart';
 import 'package:bookedge/widget/utilities/list_content.dart';
+import '../layout/menu_widget.dart';
 
 class ReservasScreen extends StatefulWidget {
   const ReservasScreen({super.key});
@@ -166,7 +167,8 @@ class _ReservasScreenState extends State<ReservasScreen> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: reservas.length,
-                          separatorBuilder: (context, index) => const Divider(),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox.shrink(),
                           itemBuilder: (context, index) {
                             final reserva = reservas[index];
                             return ListContent(data: reserva);
@@ -180,6 +182,7 @@ class _ReservasScreenState extends State<ReservasScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: const MenuWidget(),
     );
   }
 }

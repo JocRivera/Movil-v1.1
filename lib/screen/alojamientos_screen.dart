@@ -3,6 +3,7 @@ import 'package:bookedge/service/get_alojamientos.dart';
 import 'package:bookedge/widget/utilities/search_filtered_bar.dart';
 import 'package:flutter/material.dart';
 import '../widget/utilities/grid.dart';
+import '../layout/menu_widget.dart';
 
 class AlojamientosScreen extends StatefulWidget {
   const AlojamientosScreen({super.key});
@@ -101,6 +102,7 @@ class _AlojamientosScreenState extends State<AlojamientosScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: const MenuWidget(),
     );
   }
 }

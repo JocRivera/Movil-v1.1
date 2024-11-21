@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
     return const Scaffold(
       appBar: Navbar(),
       body: Content(),
-      bottomNavigationBar: MenuWidget(),
     );
   }
 }

@@ -13,20 +13,6 @@ class ListContent extends StatelessWidget {
     String status = data['estado'] ?? '';
     switch (status) {
       case 'confirmada':
-        return Colors.green;
-      case 'pendiente':
-        return Colors.orange;
-      case 'cancelada':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  Color _getStatusBackgroundColor() {
-    String status = data['estado'] ?? '';
-    switch (status) {
-      case 'confirmada':
         return Colors.green.shade100;
       case 'pendiente':
         return Colors.orange.shade100;
