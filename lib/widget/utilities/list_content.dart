@@ -13,72 +13,111 @@ class ListContent extends StatelessWidget {
     String status = data['estado'] ?? '';
     switch (status) {
       case 'confirmada':
-        return Colors.green.shade100;
+        return Colors.green;
       case 'pendiente':
         return Colors.orange;
       case 'cancelada':
-        return Colors.red.shade100;
+        return Colors.red;
       default:
         return Colors.grey;
     }
   }
 
+  Color _getStatusBackgroundColor() {
+    String status = data['estado'] ?? '';
+    switch (status) {
+      case 'confirmada':
+        return Colors.green.shade100;
+      case 'pendiente':
+        return Colors.orange.shade100;
+      case 'cancelada':
+        return Colors.red.shade100;
+      default:
+        return Colors.grey.shade100;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                data['cliente'] ?? 'Cliente desconocido',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Text(
-                data['alojamiento'] ?? 'Alojamiento desconocido',
-                style: Theme.of(context).textTheme.bodySmall,
-              )
-            ]),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: _getStatusColor(),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                data['estado'] ?? 'Estado desconocido',
-                style: const TextStyle(fontSize: 12),
-              ),
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            left: BorderSide(
+              color: _getStatusColor(),
+              width: 4,
             ),
-          ],
+          ),
         ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            const Icon(Icons.calendar_today),
-            const SizedBox(width: 8),
-            Text(
-              data['fechaInicio'] != null && data['fechaFin'] != null
-                  ? '${DateFormat('MMM d').format(DateTime.parse(data['fechaInicio']))} - ${DateFormat('MMM d, yyyy').format(DateTime.parse(data['fechaFin']))}'
-                  : 'Fechas desconocidas',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data['cliente'] ?? 'Cliente desconocido',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        data['alojamiento'] ?? 'Alojamiento desconocido',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.calendar_today,
+                    size: 16,
+                    color: Theme.of(context).textTheme.bodySmall?.color,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    data['fechaInicio'] != null && data['fechaFin'] != null
+                        ? '${DateFormat('MMM d').format(DateTime.parse(data['fechaInicio']))} - ${DateFormat('MMM d, yyyy').format(DateTime.parse(data['fechaFin']))}'
+                        : 'Fechas desconocidas',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity, // Ocupa todo el ancho disponible
+                child: Align(
+                  alignment:
+                      Alignment.centerRight, // Alinea el contenido a la derecha
+                  child: ElevatedButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        '/details',
+                        arguments: data,
+                      );
+                    },
+                    child: const Text('Ver detalles'),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 8),
-        TextButton.icon(
-          icon: const Icon(Icons.info_outline),
-          label: const Text('Ver detalles'),
-          onPressed: () {
-            Navigator.of(context).pushNamed(
-              '/details',
-              arguments: data,
-            );
-          },
-        )
-      ]),
+      ),
     );
   }
 }

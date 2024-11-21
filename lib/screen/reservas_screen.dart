@@ -42,6 +42,33 @@ class _ReservasScreenState extends State<ReservasScreen> {
       'fechaFin': '2024-11-20',
       'estado': 'cancelada',
     },
+    {
+      'id': '4',
+      'plan': 'Plan 4',
+      'alojamiento': 'Cabaña 4',
+      'cliente': 'Cliente 4',
+      'fechaInicio': '2024-11-17',
+      'fechaFin': '2024-11-20',
+      'estado': 'terminada',
+    },
+    {
+      'id': '5',
+      'plan': 'Plan 5',
+      'alojamiento': 'Cabaña 5',
+      'cliente': 'Cliente 5',
+      'fechaInicio': '2024-11-17',
+      'fechaFin': '2024-11-20',
+      'estado': 'pendiente',
+    },
+    {
+      'id': '6',
+      'plan': 'Plan 6',
+      'alojamiento': 'Cabaña 6',
+      'cliente': 'Cliente 6',
+      'fechaInicio': '2024-11-17',
+      'fechaFin': '2024-11-20',
+      'estado': 'confirmada',
+    }
   ];
 
   final List<Map<String, String>> _filterOptions = [
