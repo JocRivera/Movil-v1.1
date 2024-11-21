@@ -1,30 +1,34 @@
 class Alojamiento {
   final int id;
-  final int idTipo;
-  final int capacidad;
-  final bool estado;
+  final String? tipo;
+  final int? capacidad;
+  final String? estado;
+  final List<String>? comodidades;
   Alojamiento({
     required this.id,
-    required this.idTipo,
-    required this.capacidad,
-    required this.estado,
+    this.tipo,
+    this.capacidad,
+    this.estado,
+    this.comodidades,
   });
-
   factory Alojamiento.fromJson(Map<String, dynamic> json) {
     return Alojamiento(
-      id: json['idAloamiento'],
-      idTipo: json['idTipo'],
+      id: json['idAlojamiento'],
+      tipo: json['tipo'],
       capacidad: json['capacidad'],
       estado: json['estado'],
+      comodidades:
+          json['comodidad'] != null ? List<String>.from(json['comodidad']) : [],
     );
   }
 
-  Map<String, String> toGridItem() {
+  Map<String, dynamic> toJson() {
     return {
-      'id': id.toString(),
-      'nombre': 'Alojamiento $id',
-      'capacidad': capacidad.toString(),
-      'estado': estado ? 'Disponible' : 'Mantenimiento',
+      'id': id,
+      'tipo': tipo,
+      'capacidad': capacidad,
+      'estado': estado,
+      'comodidades': comodidades,
     };
-  } // manejamos la informacion de los alojamientos en un objeto de tipo Alojamiento
+  }
 }

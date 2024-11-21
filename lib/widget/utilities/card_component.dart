@@ -42,7 +42,7 @@ class CardComponent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    tittle,
+                    data['id'].toString(),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

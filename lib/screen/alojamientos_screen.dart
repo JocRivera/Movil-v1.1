@@ -1,3 +1,4 @@
+import 'package:bookedge/model/Alojamiento.dart';
 import 'package:bookedge/service/get_alojamientos.dart';
 import 'package:bookedge/widget/utilities/search_filtered_bar.dart';
 import 'package:flutter/material.dart';
@@ -12,50 +13,7 @@ class AlojamientosScreen extends StatefulWidget {
 
 class _AlojamientosScreenState extends State<AlojamientosScreen> {
   // Datos estáticos (quemados)
-  final List<Map<String, dynamic>> _alojamientos = [
-    {
-      'id': '1',
-      'tipo': 'Cabaña',
-      'capacidad': '4',
-      'estado': 'disponible',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-    {
-      'id': '2',
-      'tipo': 'Cabaña',
-      'capacidad': '6',
-      'estado': 'mantenimiento',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-    {
-      'id': '3',
-      'tipo': 'Cabaña',
-      'capacidad': '4',
-      'estado': 'disponible',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-    {
-      'id': '4',
-      'tipo': 'Habitacion',
-      'capacidad': '6',
-      'estado': 'mantenimiento',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-    {
-      'id': '5',
-      'tipo': 'Habitacion',
-      'capacidad': '4',
-      'estado': 'disponible',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-    {
-      'id': '6',
-      'tipo': 'Habitacion',
-      'capacidad': '6',
-      'estado': 'mantenimiento',
-      'comodidades': ['wifi', 'jacuzzi'],
-    },
-  ];
+  List<Alojamiento> _alojamientos = [];
   String _filterType = 'todas';
   String _searchQuery = '';
   List<Map<String, dynamic>> _filteredItems = [];
@@ -68,9 +26,26 @@ class _AlojamientosScreenState extends State<AlojamientosScreen> {
   @override
   void initState() {
     super.initState();
-    GetAlojamientos.fetch();
-    _filteredItems =
-        _alojamientos; // Inicializa los elementos filtrados con todos los alojamientos
+    _fetchAlojamientos();
+    // Inicializa los elementos filtrados con todos los alojamientos
+  }
+
+  Future<void> _fetchAlojamientos() async {
+    try {
+      final alojamientos = await GetAlojamientos.fetch();
+      setState(() {
+        _alojamientos = alojamientos;
+        _filteredItems =
+            _alojamientos.map((alojamiento) => alojamiento.toJson()).toList();
+      });
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al cargar los alojamientos'),
+        ),
+      );
+    }
   }
 
   void _handleSearchChanged(String value) {
@@ -89,7 +64,9 @@ class _AlojamientosScreenState extends State<AlojamientosScreen> {
 
   void _filterItems() {
     setState(() {
-      _filteredItems = _alojamientos.where((item) {
+      _filteredItems = _alojamientos
+          .map((alojamiento) => alojamiento.toJson())
+          .where((item) {
         bool matchesSearch = _searchQuery.isEmpty ||
             item['tipo']!.toLowerCase().contains(_searchQuery.toLowerCase());
 
@@ -119,7 +96,7 @@ class _AlojamientosScreenState extends State<AlojamientosScreen> {
           Expanded(
             child: Grid(
               items: _filteredItems,
-              tittle: (item) => item['id']!,
+              tittle: (item) => item['idAlojamiento'].toString(),
             ), // Se pasan los items filtrados
           ),
         ],
