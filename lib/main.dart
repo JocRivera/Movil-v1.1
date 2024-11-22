@@ -1,3 +1,4 @@
+import 'package:bookedge/screen/reservas_screen.dart';
 import 'package:flutter/material.dart';
 import './screen/home_screen.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.teal,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const ReservasScreen(),
     );
   }
 }

@@ -102,7 +102,9 @@ class _AlojamientosScreenState extends State<AlojamientosScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: const MenuWidget(),
+      bottomNavigationBar: const MenuWidget(
+        currentIndex: 1,
+      ),
     );
   }
 }
