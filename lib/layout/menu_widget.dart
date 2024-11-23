@@ -1,7 +1,7 @@
 import 'package:bookedge/screen/alojamientos_screen.dart';
+import 'package:bookedge/screen/perfil_screen.dart';
 import 'package:flutter/material.dart';
 import '../screen/reservas_screen.dart';
-import '../screen/home_screen.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({super.key, this.currentIndex});
@@ -36,7 +36,8 @@ class _MenuWidgetState extends State<MenuWidget> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => AlojamientosScreen()));
         } else if (value == 2) {
-          Navigator.pushNamed(context, "/Profile");
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PerfilScreen()));
         }
       },
       currentIndex: widget.currentIndex ?? 0,
