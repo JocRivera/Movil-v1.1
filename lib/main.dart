@@ -1,4 +1,4 @@
-import 'package:bookedge/screen/reservas_screen.dart';
+import 'package:bookedge/screen/sign_in.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Bookedge Demo',
       theme: ThemeData(
         colorSchemeSeed: Colors.teal,
         useMaterial3: true,
       ),
-      home: const ReservasScreen(),
+      home: const Login(),
     );
   }
 }
